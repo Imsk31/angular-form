@@ -1,0 +1,52 @@
+<div class="registration-container">
+  <h2>Registration Form</h2>
+  <form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required [(ngModel)]="user.name" name="name" #name="ngModel">
+      <div *ngIf="registrationForm.submitted && !name.valid" class="error-message">Name is required.</div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required [(ngModel)]="user.email" name="email" #email="ngModel">
+      <div *ngIf="registrationForm.submitted && !email.valid" class="error-message">Email is required.</div>
+    </div>
+    <div>
+      <label for="city">City:</label>
+      <input type="text" id="city" required [(ngModel)]="user.city" name="city" #city="ngModel">
+      <div *ngIf="registrationForm.submitted && !city.valid" class="error-message">City is required.</div>
+    </div>
+    <div>
+      <label for="state">State:</label>
+      <input type="text" id="state" required [(ngModel)]="user.state" name="state" #state="ngModel">
+      <div *ngIf="registrationForm.submitted && !state.valid" class="error-message">State is required.</div>
+    </div>
+    <div>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" required [(ngModel)]="user.dob" name="dob" #dob="ngModel">
+      <div *ngIf="registrationForm.submitted && !dob.valid" class="error-message">Date of Birth is required.</div>
+      <div *ngIf="registrationForm.submitted && !isDobValid" class="error-message">Date of Birth cannot be in the future.</div>
+    </div>
+    <div>
+      <label>Gender:</label>
+      <label class="radio-inline"><input type="radio" required [(ngModel)]="user.gender" name="gender" value="male"> Male</label>
+      <label class="radio-inline"><input type="radio" required [(ngModel)]="user.gender" name="gender" value="female"> Female</label>
+      <label class="radio-inline"><input type="radio" required [(ngModel)]="user.gender" name="gender" value="other"> Other</label>
+      <div *ngIf="registrationForm.submitted && !user.gender" class="error-message">Gender is required.</div>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required minlength="8" [(ngModel)]="user.password" name="password" #password="ngModel">
+      <div *ngIf="registrationForm.submitted && !password.valid" class="error-message">Password must be at least 8 characters long.</div>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" required [(ngModel)]="user.confirmPassword" name="confirmPassword" #confirmPassword="ngModel">
+      <div *ngIf="registrationForm.submitted && user.password !== user.confirmPassword" class="error-message">Passwords do not match.</div>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="btn-grad">Register</button>
+    </div>
+  </form>
+  <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+</div>
